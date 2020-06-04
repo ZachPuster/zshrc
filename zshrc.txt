@@ -1,0 +1,109 @@
+export ZSH=/Users/zacpuste/.oh-my-zsh
+
+ZSH_THEME="af-magic"
+
+[[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
+
+plugins=(git)
+
+##################
+# Exports        #
+##################
+
+export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
+export ANDROID_HOME="/usr/local/opt/android-sdk"
+export M2_HOME=/usr/local/apache-maven/apache-maven-3.5.2
+#export M2_HOME=/usr/local/apache-maven/apache-maven-3.2.5/apache-maven
+#export M2=$M2_HOME/bin:$PATH
+export M2=$M2_HOME/bin
+export PATH=/usr/local/bin:$PATH
+export PATH=/usr/bin:$PATH
+export PATH=/bin:$PATH
+export PATH=/usr/sbin:$PATH
+export PATH=/sbin:$PATH
+export PATH=/usr/local/munki:$PATH
+export PATH=/Users/zacpuste/bin:$PATH
+export PATH=/usr/local/Cellar/android-sdk/24.4.1_1:$PATH
+export PATH=/usr/local/Cellar/android-sdk/platform-tools:$PATH
+export PATH=/usr/local/Cellar/android-sdk/tools:$PATH
+export PATH=$M2:$PATH
+export PATH="/usr/local/opt/sqlite/bin:$PATH"
+#export PATH=$PATH:$HOME/bin
+export EDITOR='subl'
+#export PATH=${PATH}:/usr/android-sdk/platform-tools:/Development/android-sdk/tools
+
+#export NVM_DIR=~/.nvm
+#source $(brew --prefix nvm)/nvm.sh
+
+ export NVM_DIR="$HOME/.nvm"
+  [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+  [ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion"  # This loads nvm bash_completion
+
+source $ZSH/oh-my-zsh.sh
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/Users/zacpuste/.sdkman"
+[[ -s "/Users/zacpuste/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/zacpuste/.sdkman/bin/sdkman-init.sh"
+
+#NOTE: 	$SHELL resets current terminal window - required for maven commands
+#find /Users/zacpuste/Documents/Projects/TRC/trc-ritzcarlton-root/* . -name '*.gif' -type f -delete
+
+###################
+#     ALIASES     #
+###################
+#TRC // ENT
+alias trcBuild=" mvn clean -P deploy -Dskipwebpack=true install"
+alias trcBuildWoLocal="mvn clean -P deploy -Dskipgrunt=true install"
+alias trcBuildAll="mvn clean -P deploy install"
+alias trcWatch="aemsync -t http://admin:admin@localhost:4502 -w ~/Documents/Projects/Journey/ritzcarlton/trc-ritzcarlton-root/trc-ritzcarlton-ui"
+alias trcCHWatch="aemsync -t http://admin:admin@localhost:4502 -w ~/Documents/Projects/Journey/ritzcarlton/trc-ritzcarlton-root/content-hub-ui"
+alias trcResumeBl="mvn clean -P deploy -Dskipgrunt=true -DlocalConfig=true install -rf :trc-ritzcarlton-ui-businesslogic"
+alias trcStart="cd /Users/zacpuste/TRC_6.4.6/crx-quickstart/bin && ./start"
+alias trcStop="cd /Users/zacpuste/TRC_6.4.6/crx-quickstart/bin && ./stop"
+
+#5/3
+alias buildFive="mvn clean install -P autoInstallPackage -Dskip=true"
+alias buildFiveContent="mvn clean install -P autoInstallContent"
+alias buildFiveAll="mvn clean install -P autoInstallPackage,autoInstallContent"
+alias buildFiveFront="mvn clean install -P frontend,autoInstallPackage"
+
+#Thrivent
+alias thriventBuild="mvn -PautoInstallApp clean install"
+alias thriventContent"mvn -PautoInstallContent,autoInstallApp clean install"
+alias thriventInstallBudle="mvn -PautoInstallBundle clean install"
+alias login-thv-adm-jenkins="ssh -i ~/.ssh/thv_admin_jenkins.pem ec2-user@52.7.61.97"
+alias login-thv-adm-bastion="ssh -i ~/.ssh/thv_admin_bastion.pem ec2-user@54.152.148.15"
+alias login-thv-adm-bastion-ssh="ssh -A ec2-user@54.152.148.15"
+
+#Sherwin
+#alias swBuild="mvn clean -PautoInstallPackage install"
+
+#HRBlock
+#alias hrbBuild="mvn clean install -PautoInstallPackage -Padobe-public"
+alias hrbBuild="mvn -DhrbVersion=1.0-SNAPSHOT clean install -PautoInstallPackage  -Padobe-public"
+alias hrbStart="cd /Users/zacpuste/HRB_2/crx-quickstart/bin && ./start"
+alias hrbStop="cd /Users/zacpuste/HRB_2/crx-quickstart/bin && ./stop"
+
+#Discover
+alias dcBuildSingle="mvn clean -PautoInstallSinglePackage install"
+alias dcBuildMultiple="mvn clean -PautoInstallPackage install"
+
+#General
+#alias java7="export JAVA_HOME=`/usr/libexec/java_home -v 1.7`"
+alias java8="export JAVA_HOME=`/usr/libexec/java_home -v 1.8`"
+#alias java9="export JAVA_HOME=`/usr/libexec/java_home -v 1.9`"
+alias brewUpdate="brew update && brew upgrade && brew cleanup"
+#alias brewUpdate="brew update && brew upgrade -all && brew cleanup -force && brew prune"
+alias zshrc="subl ~/.zshrc"
+alias hostfile="sudo nano /private/etc/hosts"
+alias maven2="export M2_HOME=/usr/local/apache-maven/apache-maven-3.2.5"
+alias maven3="export M2_HOME=/usr/local/apache-maven/apache-maven-3.3.9"
+alias dnsFlush="sudo dscacheutil -flushcache;sudo killall -HUP mDNSResponder" 
+#eval $(/usr/libexec/path_helper -s)
+alias zshUpdate="upgrade_oh_my_zsh"
+alias gpull="git pull upstream"
+alias gpush="git push -u origin"
+alias javavis="/usr/bin/jvisualvm"
+alias startAppache="sudo apachectl start"
+alias stopAppache="sudo apachectl stop"
+alias code="/usr/local/bin/Code"
